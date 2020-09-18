@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  digit_eyes_client
+
+  Sample SAM Template for digit_eyes_client
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  RequestProductDetailsFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: functions/request_product_details/
+      Handler: app.lambda_handler
+      Runtime: ruby2.7
+      #Events:
+       # RequestProductDetails:
+        #  Type: Api 
+         # Properties:
+          #  Path: /reqproddetails
+          #  Method: get
+
+# Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  # RequestProductDetailsApi:
+   # Description: "API Gateway endpoint URL for Prod stage for request_product_details function"
+   # Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  # RequestProductDetailsFunction:
+   # Description: "request_product_details Lambda Function ARN"
+    #Value: !GetAtt RequestProductDetailsFunction.Arn
+  # RequestProductDetailsFunctionIamRole:
+    # Description: "Implicit IAM Role created for request_product_details function"
+    # Value: !GetAtt RequestProductDetailsFunctionRole.Arn
