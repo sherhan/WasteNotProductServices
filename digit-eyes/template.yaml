@@ -17,12 +17,29 @@ Resources:
       CodeUri: functions/request_product_details/
       Handler: app.lambda_handler
       Runtime: ruby2.7
-      #Events:
+      Environment:
+          Variables:
+            GEM_PATH: /opt/ruby/2.7.0
+            BASE_URI: 'https://www.digit-eyes.com/gtin/v2_0/'
+            LANGUAGE: "en"
+            DIGITEYES_KEY: "XXXX"
+      Layers:
+        - !Ref libs
+    # #Events:
        # RequestProductDetails:
         #  Type: Api 
          # Properties:
           #  Path: /reqproddetails
           #  Method: get
+
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: digit-eyes-lib
+      Description: Dependencies for the digit eyes app.
+      ContentUri: ./utils/.
+      CompatibleRuntimes:
+        - ruby2.7
 
 # Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

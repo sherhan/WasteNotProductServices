@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'net/http'
 
 require_relative '../../functions/utils/digiteyes_utils'
 
@@ -64,23 +65,6 @@ class UtilsTest < Test::Unit::TestCase
     assert_equal(fields_without_key, create_query_params_keyless(@key, @upc_code, @field_names, @language))
   end
 
-  def test_create_digiteyes_uri
-    # expected result
-    expected_uri = URI("https://www.digit-eyes.com/gtin/v2_0/?upcCode=9310022130908&field_names=all&language=en&signature=S8KNcqXMpcrIzY1w2CeTsFphZNc=&app_key=G+KbPeShVmYq3t6w")
-    assert_equal(expected_uri, create_digiteyes_uri(@fields["app_key"],
-                                                    @fields["upcCode"], 
-                                                    @fields["field_names"], 
-                                                    @fields["language"], 
-                                                    @fields["signature"]))
-  end
-
-  def test_create_digiteyes_uri_without_key
-    # expected result
-    expected_uri = URI("https://www.digit-eyes.com/gtin/v2_0/?upcCode=9310022130908&field_names=all&language=en&signature=S8KNcqXMpcrIzY1w2CeTsFphZNc=")
-    assert_equal(expected_uri, create_digiteyes_uri(@fields["upcCode"], 
-                                                    @fields["field_names"], 
-                                                    @fields["language"], 
-                                                    @fields["signature"]))
-  end
+  ######################################################
 
 end

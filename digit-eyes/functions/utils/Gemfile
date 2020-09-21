@@ -1,7 +1,6 @@
 source "https://rubygems.org"
 
-gem 'httparty'
-gem 'openssl'
-gem 'net/http'
+gem 'base64'
+gem 'ruby-hmac'
 
 ruby '~> 2.7.0'

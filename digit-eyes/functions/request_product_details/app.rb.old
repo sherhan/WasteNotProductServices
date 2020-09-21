@@ -1,7 +1,7 @@
 require 'json'
-require 'base64'
-require 'hmac-sha1'
 require 'net/http'
+
+require_relative '../utils/digiteyes_utils'
 
 # Keys
 APP_KEY = '/7s9n3g5eh0u'
@@ -11,25 +11,6 @@ DEFAULT_AUTH_KEY = 'DEiygeist'
 # URI
 BASE_URI = 'https://www.digit-eyes.com/gtin/v2_0/'
 LANG = "en"
-
-# generates a signature for digit-eyes api calls
-# Returns: Base64 encoded HMAC-SHA1 hash of *key + UPC/EAN code)
-def generate_signature(key, upc_code)
-
-    hmac = (HMAC::SHA1.new(key) << upc_code).digest
-    return  Base64.strict_encode64(hmac)
-    
-end
-
-# create query params hashtable for the digit-eye api without app_key included
-def create_query_params_keyless(app_key, upc_code, field_names, language)
-    return { 
-      "upcCode" => upc_code, 
-      "field_names" => "all", 
-      "language" => "en",
-      "signature" => generate_signature(app_key, upc_code)
-    }
-  end  
 
 def lookup_upc(app_key, upc_code, field_names, language)
     # Create URI
