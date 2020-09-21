@@ -23,18 +23,23 @@ To use the SAM CLI, you need the following tools.
 
 Build the application by running 
 
+```bash
 digit-eyes$ ./build-all.sh
-
+```
 This will create a folder './aws-sam' and create a local installation here ready for test or deployment. The build script also automates the building of a dependency layer. Dependency layer
 can be built separately by running the script:
 
+```bash
 digit-eyes$ ./build-layer.sh
+```
 
 ## Testing
 
 A test suite can be executed by running:
 
-digist-eyes$ ./run_tests.sh
+```bash
+digit-eyes$ ./run_tests.sh
+```
 
 'run_tests.sh' performs unit tests and runs lambdafunctions locally.
 
