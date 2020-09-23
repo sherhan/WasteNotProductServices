@@ -6,7 +6,7 @@ require_relative '../../functions/request_product_details/app'
 class RequestProductDetailsTest < Test::Unit::TestCase
 
   def setup
-    # Test key/[code, signature] pairs
+    # Dummy key/[code, signature] pairs
     # Key => [upc_code, signature]
     @signature_dict = {
       "bQeThWmZq4t7w!z%" => ["9310022130908", "K7eaE7mNhdJUmc0XvsJidgpaxnk="], 
@@ -66,14 +66,19 @@ class RequestProductDetailsTest < Test::Unit::TestCase
   ########## HANDLER TESTS ########################################
 
   def test_lambda_handler
-   
+    # Directory of this files location
+    this_files_dir = File.expand_path(File.dirname(__FILE__))
+
     # Read expected output JSON file
-    this_files_dir = File.expand_path(File.dirname(__FILE__)) # directory of this file
     expected_str = File.read(this_files_dir + "/product.json")
     expected = JSON.parse(expected_str)
     
+    # Read test event JSON file
+    event_str = File.read(this_files_dir + "/event.json")
+    event = JSON.parse(event_str)
+
     # execute test
-    result_str = lambda_handler(event: '', context: '')
+    result_str = lambda_handler(event: event, context: '')
     result = JSON.parse(result_str)
 
     # assert

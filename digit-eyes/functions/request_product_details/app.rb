@@ -4,15 +4,6 @@ require 'net/http'
 require 'base64'
 require 'hmac-sha1'
 
-# Keys
-APP_KEY = '/7s9n3g5eh0u'
-AUTH_KEY = 'Uw78B5n5j0Zv0Ph4'
-DEFAULT_AUTH_KEY = 'DEiygeist'
-
-# URI
-BASE_URI = 'https://www.digit-eyes.com/gtin/v2_0/'
-LANG = "en"
-
 # generates a signature for digit-eyes api calls
 # Returns: Base64 encoded HMAC-SHA1 hash of *key + UPC/EAN code)
 def generate_signature(key, upc_code)
@@ -43,10 +34,10 @@ def create_query_params_keyless(app_key, upc_code, field_names, language)
   }
 end  
 
-
 def lookup_upc(app_key, upc_code, field_names, language)
     # Create URI
-    uri = URI(BASE_URI)
+    # uri = URI(ENV["BASE_URI"])
+    uri = URI("https://www.digit-eyes.com/gtin/v2_0/")
     query_params = create_query_params_keyless(app_key, upc_code, field_names, language)
     uri.query = URI.encode_www_form(query_params)
 
@@ -56,10 +47,11 @@ end
 
 def lambda_handler(event:, context:) 
 
-    upc_code = "9310022130908"
-    field_names = "all"
+    app_key = ENV["DIGITEYES_KEY"]
+    lang = ENV["LANGUAGE"]
+    upc_code = event["upc_code"]
+    field_names = event["field_names"]
 
-    return lookup_upc(DEFAULT_AUTH_KEY, upc_code, field_names, LANG)
+    return lookup_upc(app_key, upc_code, field_names, lang)
 end
 
-#puts lambda_handler(event: '', context: '')
