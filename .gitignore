@@ -1,3 +1,4 @@
 docs/UPCAPIImplementation.pdf
 digit-eyes/samconfig.toml
 digit-eyes/functions/utils/Gemfile.lock
+digit-eyes/.bundle/config

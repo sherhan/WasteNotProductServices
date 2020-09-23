@@ -1,5 +1,5 @@
 source "https://rubygems.org"
 
-gem 'ruby-hmac'
+gem 'ruby-hmac', '~> 0.4.0'
 
 ruby '~> 2.7.0'
