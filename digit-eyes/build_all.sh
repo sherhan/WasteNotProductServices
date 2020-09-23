@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo '>>> Building lib layer....'
+echo '>>> Building dependencies layer....'
 ./build_layer.sh
-echo '>>> lib layer build complete.'
+echo '>>> dependencies layer build complete.'
 echo '>>> Building lambda deployment package....'
-sam build #--use-container
+sam build --use-container
 echo '>>> lambda deployment package build complete.'

@@ -1,6 +1,5 @@
 source "https://rubygems.org"
 
-gem 'base64'
 gem 'ruby-hmac'
 
 ruby '~> 2.7.0'

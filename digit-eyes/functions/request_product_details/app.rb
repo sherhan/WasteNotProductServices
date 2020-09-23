@@ -3,11 +3,6 @@ require 'base64'
 require 'hmac-sha1'
 require 'net/http'
 
-# Keys
-APP_KEY = '/7s9n3g5eh0u'
-AUTH_KEY = 'Uw78B5n5j0Zv0Ph4'
-DEFAULT_AUTH_KEY = 'DEiygeist'
-
 # URI
 BASE_URI = 'https://www.digit-eyes.com/gtin/v2_0/'
 LANG = "en"
@@ -33,7 +28,7 @@ def create_query_params_keyless(app_key, upc_code, field_names, language)
 
 def lookup_upc(app_key, upc_code, field_names, language)
     # Create URI
-    uri = URI(BASE_URI)
+    uri = ENV['BASE_URI']
     query_params = create_query_params_keyless(app_key, upc_code, field_names, language)
     uri.query = URI.encode_www_form(query_params)
 
@@ -43,9 +38,12 @@ end
 
 def lambda_handler(event:, context:) 
     # Initialise inputs
+    app_key = ENV['DIGITEYES_KEY']
+    lang = ENV['LANGUAGE']
     upc_code = "9310022130908"
     field_names = "all"
-    return lookup_upc(DEFAULT_AUTH_KEY, upc_code, field_names, LANG)
+
+    return lookup_upc(app_key, upc_code, field_names, lang)
 end
 
 #puts lambda_handler(event: '', context: '')

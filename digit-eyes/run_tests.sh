@@ -5,7 +5,7 @@ $BuiltTemplate = "./.aws-sam/build/template.yaml"
 $DefaultLambda="RequestProductDetailsFunction"
 
 # run unit tests
-ruby tests/unit/tc_utils.rb
+ruby tests/unit/tc_digiteyes_utils.rb
 ruby tests/unit/tc_request_product_details.rb
 
 # run local simulation of lambdas

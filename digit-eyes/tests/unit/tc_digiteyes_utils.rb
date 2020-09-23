@@ -8,7 +8,7 @@ class UtilsTest < Test::Unit::TestCase
   ########### INIT/DE-INIT #####################################
 
   def setup
-    # Test key/[code, signature] pairs
+    # Dummy key/[code, signature] pairs
     # Key => [upc_code, signature]
     @signature_dict = {
       "bQeThWmZq4t7w!z%" => ["9310022130908", "K7eaE7mNhdJUmc0XvsJidgpaxnk="], 
