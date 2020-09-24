@@ -4,8 +4,9 @@ This project contains source code and supporting files for a serverless applicat
 - functions - Code for the application's Lambda functions to retrieve product details from the digit-eyes api.
 - tests - Unit tests for the Lambda functions' application code.
 - template.yaml - A template that defines the application's AWS resources.
+- bash scripts - used to automate build, install, test and cleanup activities.
 
-The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
+The application uses several AWS resources, including Lambda functions and an [PENDING]API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates the application code.
 
 ## Requirements
 
@@ -24,14 +25,9 @@ To use the SAM CLI, you need the following tools.
 Build the application by running 
 
 ```bash
-digit-eyes$ ./build-all.sh
+digit-eyes$ ./build.sh
 ```
-This will create a folder './aws-sam' and create a local installation here ready for test or deployment. The build script also automates the building of a dependency layer. Dependency layer
-can be built separately by running the script:
-
-```bash
-digit-eyes$ ./build-layer.sh
-```
+This will create a folder './aws-sam' and create a local installation there ready for test or deployment. 
 
 ## Testing
 
@@ -41,13 +37,19 @@ A test suite can be executed by running:
 digit-eyes$ ./run_tests.sh
 ```
 
-'run_tests.sh' performs unit tests and runs lambdafunctions locally.
+'run_tests.sh' performs unit tests and runs lambda functions locally.
 
 ## Unit tests
 
-Tests are defined in the `tests` folder in this project.
+Utit tests are defined in the `tests/unit/` folder in this project. And can be called by running the command
 
 ```bash
 digit_eyes_client$ ruby tests/unit/tc_utils.rb 
-digit_eyes_client$ ruby tests/unit/tc_request_product_details.rb 
+```
+## Cleanup
+
+Running the cleanup script removes the SAM CLI build directory .aws-sam:
+
+```bash
+digit_eyes_client$ ./cleanup.sh
 ```
