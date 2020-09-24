@@ -36,8 +36,7 @@ end
 
 def lookup_upc(app_key, upc_code, field_names, language)
     # Create URI
-    # uri = URI(ENV["BASE_URI"])
-    uri = URI("https://www.digit-eyes.com/gtin/v2_0/")
+    uri = URI(ENV["BASE_URI"])
     query_params = create_query_params_keyless(app_key, upc_code, field_names, language)
     uri.query = URI.encode_www_form(query_params)
 
