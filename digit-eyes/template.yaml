@@ -19,4 +19,10 @@ Resources:
           Variables:
             BASE_URI: "https://www.digit-eyes.com/gtin/v2_0/"
             LANGUAGE: "en"
-            DIGITEYES_KEY: "XXXXXX"
+            DIGITEYES_KEY: "XXXXX"
+      Events:
+        RequestProductDetails:
+            Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+            Properties:
+              Path: /lookup
+              Method: get
