@@ -41,7 +41,10 @@ def lookup_upc(app_key, upc_code, field_names, language)
     uri.query = URI.encode_www_form(query_params)
 
     response = Net::HTTP.get_response(uri)
-    return response.body
+    response_body = response.body.gsub(/\R+/, ' ')   # replace newline chars with space
+
+    return response_body
+
 end
 
 def lambda_handler(event:, context:) 
@@ -54,9 +57,8 @@ def lambda_handler(event:, context:)
     response = lookup_upc(app_key, upc_code, field_names, lang)
     
     {
-      body: {
-        message: response,
-      }
+      statusCode: 200,
+      body: response
     }
 
 end
