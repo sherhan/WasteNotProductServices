@@ -41,16 +41,24 @@ def lookup_upc(app_key, upc_code, field_names, language)
     uri.query = URI.encode_www_form(query_params)
 
     response = Net::HTTP.get_response(uri)
-    return response.body
+    response_body = response.body.gsub(/\R+/, ' ')   # replace newline chars with space
+
+    return response_body
+
 end
 
 def lambda_handler(event:, context:) 
 
     app_key = ENV["DIGITEYES_KEY"]
     lang = ENV["LANGUAGE"]
-    upc_code = event["upc_code"]
-    field_names = event["field_names"]
+    upc_code = event["queryStringParameters"]["upc_code"]
+    field_names = event["queryStringParameters"]["field_names"]
 
-    return lookup_upc(app_key, upc_code, field_names, lang)
+    response = lookup_upc(app_key, upc_code, field_names, lang)
+    
+    {
+      statusCode: 200,
+      body: response
+    }
+
 end
-
