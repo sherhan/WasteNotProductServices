@@ -13,7 +13,7 @@ run_unit_tests() {
 }
 
 run_lambda_locally() {
-    sam local invoke -e events/SchmackosEvent.json $1
+    sam local invoke -e events/HTTPRequestEvent.json $1
 }
 
 run_default() {
